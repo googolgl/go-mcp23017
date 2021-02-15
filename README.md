@@ -114,11 +114,13 @@ to discover address occupied by peripheral device. To install utility you should
 	70: -- -- -- -- -- -- 76 --    
 	```
 
-Change i2c bus baudrate i2c
+Change i2c bus baudrate
 ------------
 
+```
 modprobe -r i2c_bcm2708
 modprobe i2c_bcm2708 baudrate=1200000
+```
 
 Datasheets for supported devices
 ------------
