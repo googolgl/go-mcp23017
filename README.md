@@ -40,6 +40,13 @@ func main() {
 
     // Sets all pins to INPUT mode
     mcp.Set(AllPins()).INPUT()
+    
+    // Gets values all INPUT pins
+    v, err := mcp.Get(AllPins())
+    if err != nil {
+    	log.Printf(err.Error())
+    }
+    log.Println(v)
 
     // Turn on pull up resistors for A0, A1, A2 and B7 pins
     mcp.Set(Pins{"A0", "A1", "A2", "B7"}).PULLUP()
@@ -52,13 +59,13 @@ func main() {
     // Run cycle
     for {
         if err := mcp.Set(LedPin).HIGH(); err != nil {
-			log.Printf(err.Error())
-		}
+		log.Printf(err.Error())
+	}
         time.Sleep(3 * time.Second)
 
         if err := mcp.Set(LedPin).LOW(); err != nil {
-			log.Printf(err.Error())
-		}
+		log.Printf(err.Error())
+	}
         time.Sleep(3 * time.Second)
     }
 }
