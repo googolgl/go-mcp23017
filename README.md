@@ -39,19 +39,19 @@ func main() {
     }
 
     // Sets all pins to INPUT mode
-    mcp.Set(AllPins()).INPUT()
+    mcp.Set(mcp23017.AllPins()).INPUT()
     
     // Gets values all INPUT pins
-    v, err := mcp.Get(AllPins())
+    v, err := mcp.Get(mcp23017.AllPins())
     if err != nil {
     	log.Printf(err.Error())
     }
     log.Println(v)
 
     // Turn on pull up resistors for A0, A1, A2 and B7 pins
-    mcp.Set(Pins{"A0", "A1", "A2", "B7"}).PULLUP()
+    mcp.Set(mcp23017.Pins{"A0", "A1", "A2", "B7"}).PULLUP()
 
-    LedPin := Pins{"B0", "B1", "B2", "B3"}
+    LedPin := mcp23017.Pins{"B0", "B1", "B2", "B3"}
     
     // Sets pins to OUTPUT mode
     mcp.Set(LedPin).OUTPUT()
