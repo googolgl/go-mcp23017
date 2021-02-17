@@ -230,7 +230,6 @@ func (mcp *MCP23017) Get(p Pins) (map[string]uint8, error) {
 	}
 
 	for _, v := range p {
-		log.Println(v)
 		pin, _ := strconv.Atoi(v[1:])
 		if strings.HasPrefix(v, "A") {
 			pinLevels[v] = (gpioA >> uint8(pin)) & 1
