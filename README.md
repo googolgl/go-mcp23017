@@ -33,7 +33,7 @@ func main() {
         log.Fatal(err)
     }
 
-    mcp, err = mcp23017.New(i2c, nil)
+    mcp, err := mcp23017.New(i2c, nil)
     if err != nil {
         log.Fatal(err)
     }

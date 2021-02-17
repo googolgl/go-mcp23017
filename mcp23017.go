@@ -159,7 +159,7 @@ func New(i2c *i2c.Options, opt ...regOption) (*MCP23017, error) {
 	}
 
 	//in default mode IOCON.BANK = 0 and IOCON addres = 0x10
-	if err := mcp.writeReg(regAddres(0x10), byte(iocon)); err != nil {
+	if err := mcp.writeReg(OLAT, byte(iocon)); err != nil {
 		return nil, err
 	}
 
