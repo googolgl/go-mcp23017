@@ -4,9 +4,9 @@ MCP23017 16-Bit I/O Expander with Serial Interface Driver
 [![GoDoc](https://godoc.org/github.com/googolgl/go-mcp23017?status.svg)](https://godoc.org/github.com/googolgl/go-mcp23017)
 [![MIT License](http://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-MCP23017 ([pdf reference](https://raw.github.com/googolgl/go-mcp23017/master/docs/mcp23017.pdf)) is a popular controller among Arduino and Raspberry PI developers.
+MCP23017 is a popular controller among Arduino and Raspberry PI developers.
 The 16-Bit I/O Expander with Serial Interface Driver will drive up to 16 pins over I2C with only 2 pins.
-![image](https://raw.github.com/googolgl/go-mcp23017/master/docs/mcp23017.jpg)
+![image](https://raw.github.com/googolgl/go-mcp23017/master/mcp23017.jpg)
 
 Here is a library written in [Go programming language](https://golang.org/) for Raspberry PI and counterparts.
 
@@ -33,7 +33,7 @@ func main() {
         log.Fatal(err)
     }
 
-    mcp, err := mcp23017.New(i2c, nil)
+    mcp, err := mcp23017.New(i2c)
     if err != nil {
         log.Fatal(err)
     }
