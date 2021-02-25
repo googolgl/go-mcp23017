@@ -373,7 +373,7 @@ func checkValidPins(p Pins) (ModeBanks, error) {
 
 // Close - return default settings
 func (mcp *MCP23017) Close() error {
-	if err := mcp.writeReg(IOCON, byte(0x00)); err != nil {
+	if err := mcp.writeReg(IOCON, 0x00); err != nil {
 		return err
 	}
 	return nil
