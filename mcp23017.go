@@ -151,6 +151,11 @@ func New(i2c *i2c.Options, opt ...regOption) (*MCP23017, error) {
 		//name: "Controller" + fmt.Sprintf("-0x%x", adr),
 	}
 
+	// fix if mode IOCON.BANK = 1
+	if err := mcp.writeReg(IOCON, 0x00); err != nil {
+		return nil, err
+	}
+
 	iocon := BANK
 	if opt != nil {
 		for _, v := range opt {
@@ -369,12 +374,4 @@ func checkValidPins(p Pins) (ModeBanks, error) {
 	mbanks.pins = p
 
 	return mbanks, nil
-}
-
-// Close - return default settings
-func (mcp *MCP23017) Close() error {
-	if err := mcp.writeReg(IOCON, 0x00); err != nil {
-		return err
-	}
-	return nil
 }
