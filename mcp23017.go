@@ -42,7 +42,7 @@ type (
 	Pins []string
 	// MCP23017 is a Driver for the MCP23017 16-Bit I/O Expander with Serial Interface
 	MCP23017 struct {
-		I2C *i2c.Options
+		i2c *i2c.Options
 		//name string
 		sync.Mutex
 	}
@@ -147,7 +147,7 @@ func New(i2c *i2c.Options, opt ...regOption) (*MCP23017, error) {
 	}
 
 	mcp := &MCP23017{
-		I2C: i2c,
+		i2c: i2c,
 		//name: "Controller" + fmt.Sprintf("-0x%x", adr),
 	}
 
@@ -194,14 +194,14 @@ func New(i2c *i2c.Options, opt ...regOption) (*MCP23017, error) {
 func (mcp *MCP23017) readReg(ra regAddres) (byte, error) {
 	mcp.Lock()
 	defer mcp.Unlock()
-	return mcp.I2C.ReadRegU8(byte(ra))
+	return mcp.i2c.ReadRegU8(byte(ra))
 }
 
 // writeReg writes a register, given its address and the value to write.
 func (mcp *MCP23017) writeReg(ra regAddres, val byte) error {
 	mcp.Lock()
 	defer mcp.Unlock()
-	return mcp.I2C.WriteRegU8(byte(ra), val)
+	return mcp.i2c.WriteRegU8(byte(ra), val)
 }
 
 // Get - values by pins
@@ -369,4 +369,12 @@ func checkValidPins(p Pins) (ModeBanks, error) {
 	mbanks.pins = p
 
 	return mbanks, nil
+}
+
+// Close - return default settings
+func (mcp *MCP23017) Close() error {
+	if err := mcp.writeReg(IOCON, byte(0x00)); err != nil {
+		return err
+	}
+	return nil
 }
